@@ -1,0 +1,22 @@
+{
+    "appenders":
+        [
+            {
+                "type":"console",
+                "category":"console"
+            },
+            {
+                "category": [ "cheese","console" ],
+                "type": "dateFile",
+                "filename": "logs/date",
+                "alwaysIncludePattern": true,
+                "pattern": "-yyyy-MM-dd-hh.log"
+            }
+        ],
+    "replaceConsole": false,
+    "levels":
+    {
+        "logFile":"AUTO",
+        "console":"ALL"
+    }
+}
