@@ -27,25 +27,21 @@ var router_root_path = './routes';
 
 //dynamic load routers
 var file_separator = '/';
+var index_file = 'index.js';
 (function (path) {
   var stat = fs.lstatSync(path);
   if (stat.isFile()) {
-    if (_.endsWith(path, 'index.js')) {
-      var router = require(path);
-      var urlPath = path.substr(router_root_path.length, path.length - router_root_path.length - 8);
-      app.use(urlPath, router);
+    if (_.endsWith(path, index_file)) {
+      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - index_file.length), require(path));
     } else {
-      var router = require(path);
-      var urlPath = path.substr(router_root_path.length, path.length - router_root_path.length - 3);
-      app.use(urlPath, router);
+      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - 3), require(path));
     }
-
   } else if (stat.isDirectory()) {
     var files = fs.readdirSync(path);
-    for (var i = 0; i < files.length; i++) {
-      var newPath = path + file_separator + files[i];
-      arguments.callee(newPath);
-    }
+    var self = arguments.callee;
+    _.forEach(files, function(file){
+      self(path + file_separator + file);
+    });
   } else {
     var err = new Error(path + '不是文件或者目录！');
     throw err;
