@@ -44,7 +44,6 @@ var file_separator = '/';
     var files = fs.readdirSync(path);
     for (var i = 0; i < files.length; i++) {
       var newPath = path + file_separator + files[i];
-      console.error(arguments.callee);
       arguments.callee(newPath);
     }
   } else {
