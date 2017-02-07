@@ -11,6 +11,10 @@ var logger = logFactory.getLogger();
 
 var app = express();
 
+process.on('uncaughtException', function (err) {
+  logger.error(err);
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
