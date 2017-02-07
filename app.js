@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var logFactory = require('logfactory');
+var logger = logFactory.getLogger();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -34,7 +35,6 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-var logger = logFactory.getLogger();
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
