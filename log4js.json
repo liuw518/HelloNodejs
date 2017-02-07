@@ -6,7 +6,7 @@
                 "category":"console"
             },
             {
-                "category": [ "cheese","console" ],
+                "category": [ "logFile" ],
                 "type": "dateFile",
                 "filename": "logs/date",
                 "alwaysIncludePattern": true,
