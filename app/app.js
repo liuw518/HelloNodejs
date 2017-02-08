@@ -3,9 +3,8 @@ var path = require('path');
 // var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs');
-var _ = require('lodash');
 
+var routersLoader = require('routers-loader');
 var logFactory = require('logfactory');
 var logger = logFactory.getLogger();
 
@@ -27,30 +26,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var router_root_path = './app/routes';
-
 //dynamic load routers
-var file_separator = '/';
-var index_file = 'index.js';
-(function (path) {
-  var stat = fs.lstatSync(path);
-  if (stat.isFile()) {
-    if (_.endsWith(path, index_file)) {
-      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - index_file.length), require('./'+path.substr(5)));
-    } else {
-      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - 3), require('./'+path.substr(5)));
-    }
-  } else if (stat.isDirectory()) {
-    var files = fs.readdirSync(path);
-    var self = arguments.callee;
-    _.forEach(files, function(file){
-      self(path + file_separator + file);
-    });
-  } else {
-    var err = new Error(path + '不是文件或者目录！');
-    throw err;
-  }
-})(router_root_path);
+routersLoader('./app/routes', app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
