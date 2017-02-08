@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var router_root_path = './server/routes';
+var router_root_path = './app/routes';
 
 //dynamic load routers
 var file_separator = '/';
@@ -36,9 +36,9 @@ var index_file = 'index.js';
   var stat = fs.lstatSync(path);
   if (stat.isFile()) {
     if (_.endsWith(path, index_file)) {
-      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - index_file.length), require(path));
+      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - index_file.length), require('./'+path.substr(5)));
     } else {
-      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - 3), require(path));
+      app.use(path.substr(router_root_path.length, path.length - router_root_path.length - 3), require('./'+path.substr(5)));
     }
   } else if (stat.isDirectory()) {
     var files = fs.readdirSync(path);
