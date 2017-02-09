@@ -3,7 +3,7 @@ var router = express.Router();
 var logger = require('logfactory').getLogger();
 var mysql = require('mysql');
 var Promise = require("bluebird");
-var dbutil = require('tx-manager');
+var dbutil = require('dbHelper');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
