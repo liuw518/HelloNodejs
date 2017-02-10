@@ -56,9 +56,21 @@ function authCheck(req, res, next) {
     //从请求中取出jwt判断是否有权访问
     var token = req.cookies._t;
     if (token) {
-        var decoded = jwt.verify(token, config.auth.jwt.PRIVATE_KEY, function (err, decoded) {
+        jwt.verify(token, config.auth.jwt.PRIVATE_KEY, function (err, info) {
             if (err) {
                 res.redirect(config.auth.loginFailure);
+            }
+            if(info.exp - (_.now()/1000) <= 300){
+                //如果token将于5分钟内过期，将更新token
+                var token = jwt.sign({
+                        name: info.name,
+                        id: info.id,
+                        account: info.account
+                    }, config.auth.jwt.PRIVATE_KEY, {
+                        expiresIn: config.auth.jwt.timeout,
+                        issuer: config.auth.jwt.issuer
+                    });
+                    res.cookie('_t', token);
             }
             return next();
         });
