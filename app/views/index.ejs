@@ -5,7 +5,24 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+      <div>
+        <label>Username:</label>
+        <input type="text" name="username"/>
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" name="password"/>
+      </div>
+      <div>
+        <input type="submit" value="Log In"/>
+      </div>
+    </form>
+    <form action="/logout" method="post">
+      <div>
+        <input type="submit" value="Log Out"/>
+      </div>
+    </form>
   </body>
 </html>

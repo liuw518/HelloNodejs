@@ -1,8 +1,15 @@
+if(global._){
+  throw new Error('global中已经存在名为_的属性，无法将lodash注册到global中');
+} else {
+  global._ = require('lodash');
+}
+
 var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var auth = require('./auth');
 
 var routersLoader = require('routers-loader');
 var logFactory = require('logfactory');
@@ -26,8 +33,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(path.dirname(__dirname), 'public')));
 
+//access control
+app.use('/',auth.router);
+
 //dynamic load routers
-routersLoader('./app/routes', app);
+routersLoader('./app/routes', app, auth.check);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
