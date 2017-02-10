@@ -3,7 +3,6 @@ var path = require('path');
 // var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var jwt = require('jsonwebtoken');
 var _ = require('lodash');
 
 var routersLoader = require('routers-loader');
@@ -28,51 +27,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(path.dirname(__dirname), 'public')));
 
-
-app.get('/', require('./routes/index'));
-app.get('/login', function(req, res, next){
-  res.redirect('/');
-});
-
-//下面这个是用户登录的逻辑
-app.post('/login', function(req, res, next){
-  console.debug("开始登录...");
-  var username = req.body.username;
-  var pass = req.body.password;
-  //添加验证逻辑
-
-  var token = jwt.sign({name: username}, 'PrivateKey',{expiresIn:500,issuer:'Neusoft',subject:'test'});
-  res.cookie('_t',token);
-  res.redirect('/users');
-});
-
-
-//此方法为用户请求验证的逻辑
-function authInterceptor(req, res, next) {
-    //从请求中取出jwt判断是否有权访问
-    var token = req.cookies._t;
-    if(token){
-      var decoded = jwt.verify(token, 'PrivateKey', function(err, decoded){
-        if(err){
-          res.redirect('/');
-          return;
-        }
-        return next();
-      });
-    } else {
-      res.redirect('/');
-    }
-}
+//access control
+app.use('/',auth.router);
 
 //dynamic load routers
-routersLoader('./app/routes', app, authInterceptor);
-
-//用户登出的逻辑
-app.post('/logout', function (req, res) {
-    res.clearCookie('_t');
-    res.redirect('/');
-    return;
-});
+routersLoader('./app/routes', app, auth.check);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
