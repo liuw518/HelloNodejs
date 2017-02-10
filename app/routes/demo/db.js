@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var logger = require('logfactory').getLogger();
-var mysql = require('mysql');
 var Promise = require("bluebird");
 var dbutil = require('dbHelper');
 
