@@ -1,5 +1,6 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var config = require('config');
 var router = express.Router();
 
 /**
@@ -11,7 +12,7 @@ router.get('/', require('./routes/index'));
  * 登录页面路由
  */
 router.get('/login', function(req, res, next){
-  res.redirect('/');
+  res.redirect(config.auth.loginFailure);
 });
 
 /**
@@ -19,13 +20,13 @@ router.get('/login', function(req, res, next){
  */
 router.post('/login', function(req, res, next){
   console.debug("开始登录...");
-  var username = req.body.username;
-  var pass = req.body.password;
+  var account = req.body.username;
+  var pwd = req.body.password;
   //添加验证逻辑
 
-  var token = jwt.sign({name: username}, 'PrivateKey',{expiresIn:500,issuer:'Neusoft',subject:'test'});
+  var token = jwt.sign({name: account}, config.auth.jwt.PRIVATE_KEY,{expiresIn:config.auth.jwt.timeout,issuer:config.auth.jwt.issuer});
   res.cookie('_t',token);
-  res.redirect('/users');
+  res.redirect(config.auth.loginSuccess);
 });
 
 
@@ -36,14 +37,14 @@ function authCheck(req, res, next) {
     //从请求中取出jwt判断是否有权访问
     var token = req.cookies._t;
     if(token){
-      var decoded = jwt.verify(token, 'PrivateKey', function(err, decoded){
+      var decoded = jwt.verify(token, config.auth.jwt.PRIVATE_KEY, function(err, decoded){
         if(err){
-          res.redirect('/');
+          res.redirect(config.auth.loginFailure);
         }
         return next();
       });
     } else {
-      res.redirect('/');
+      res.redirect(config.auth.loginFailure);
     }
 }
 
@@ -52,7 +53,7 @@ function authCheck(req, res, next) {
  */
 router.post('/logout', function (req, res) {
     res.clearCookie('_t');
-    res.redirect('/');
+    res.redirect(config.auth.loginFailure);
 });
 
 module.exports = {
