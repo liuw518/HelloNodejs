@@ -24,7 +24,7 @@ app.use(logFactory.log4js.connectLogger(logger, {level: 'auto'}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(path.dirname(__dirname), 'public')));
 
 //dynamic load routers
 routersLoader('./app/routes', app);
