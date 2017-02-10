@@ -57,7 +57,7 @@ function authCheck(req, res, next) {
     var token = req.cookies._t;
     if (token) {
         jwt.verify(token, config.auth.jwt.PRIVATE_KEY, function (err, info) {
-            if (err) {
+            if (err || !info) {
                 res.redirect(config.auth.loginFailure);
             }
             if(info.exp - (_.now()/1000) <= 300){
