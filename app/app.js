@@ -1,9 +1,14 @@
+if(global._){
+  throw new Error('global中已经存在名为_的属性，无法将lodash注册到global中');
+} else {
+  global._ = require('lodash');
+}
+
 var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var _ = require('lodash');
 
 var routersLoader = require('routers-loader');
 var logFactory = require('logfactory');
