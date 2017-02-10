@@ -8,7 +8,8 @@ var logFactory = require('logfactory');
 var logger = logFactory.getLogger();
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
-
+var session = require('express-session')
+var flash = require('express-flash');
 var app = express();
 
 process.on('uncaughtException', function (err) {
@@ -25,13 +26,14 @@ app.use(logFactory.log4js.connectLogger(logger, {level: 'auto'}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.session({secret: 'blog.fens.me', cookie: { maxAge: 60000 }}));
+app.use(session({secret: 'blog.fens.me', resave: false, saveUninitialized: false,cookie: { maxAge: 60000 }}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
+app.use(express.static(path.join(path.dirname(__dirname), 'public')));
 
 passport.use('local', new LocalStrategy(
-    function (username, password, done) {
+    function (username, password, done) {//用户登录时请求的方法
         var user = {
             id: '1',
             username: 'admin',
@@ -39,10 +41,10 @@ passport.use('local', new LocalStrategy(
         }; // 可以配置通过数据库方式读取登陆账号
 
         if (username !== user.username) {
-            return done(null, false, { message: 'Incorrect username.' });
+            return done(null, false, { message: '用户名不存在' });
         }
         if (password !== user.password) {
-            return done(null, false, { message: 'Incorrect password.' });
+            return done(null, false, { message: '密码不正确' });
         }
 
         return done(null, user);
@@ -57,9 +59,37 @@ passport.deserializeUser(function (user, done) {//删除user对象
     done(null, user);//可以通过数据库方式操作
 });
 
+app.get('/', require('./routes/index'));
+app.get('/login', function(req, res, next){
+  res.redirect('/');
+});
 
+//下面这个是用户登录的逻辑
+app.post('/login',
+    passport.authenticate('local', {
+        successRedirect: '/users'
+        ,failureFlash: true
+        ,session: false
+        // ,
+        // failureRedirect: '/'
+    }));
+
+
+//此方法为用户请求验证的逻辑
+function authInterceptor(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+
+    res.redirect('/');
+}
 //dynamic load routers
-routersLoader('./app/routes', app);
+routersLoader('./app/routes', app, authInterceptor);
+
+//用户登出的逻辑
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
