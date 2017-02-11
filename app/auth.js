@@ -60,7 +60,7 @@ function authCheck(req, res, next) {
             if (err || !info) {
                 res.redirect(config.auth.loginFailure);
             }
-            if(info.exp - (_.now()/1000) <= 300){
+            if(info.exp - (Date.now()/1000) <= 300){
                 //如果token将于5分钟内过期，将更新token
                 var token = jwt.sign({
                         name: info.name,
