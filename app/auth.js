@@ -72,6 +72,11 @@ function authCheck(req, res, next) {
                     });
                     res.cookie('_t', token);
             }
+            req.currentUser = {
+                name: info.name,
+                id: info.id,
+                account: info.account
+            };
             return next();
         });
     } else {
