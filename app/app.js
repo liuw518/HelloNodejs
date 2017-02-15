@@ -1,5 +1,5 @@
 if(global._){
-  throw new Error('global中已经存在名为_的属性，无法将lodash注册到global中');
+  throw new Error('global中已经存在名为_的属性，无法将lodash注册到global._中');
 } else {
   global._ = require('lodash');
 }
