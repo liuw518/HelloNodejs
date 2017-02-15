@@ -2,9 +2,9 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var config = require('config');
 var router = express.Router();
-var logger = require('logfactory').getLogger();
+var logger = require('log-factory').getLogger();
 var Promise = require("bluebird");
-var dbutil = require('dbHelper');
+var dbutil = require('db-helper');
 
 /**
  * 登录页面路由

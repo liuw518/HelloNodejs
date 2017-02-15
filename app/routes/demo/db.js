@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var logger = require('logfactory').getLogger();
+var logger = require('log-factory').getLogger();
 var Promise = require("bluebird");
-var dbutil = require('dbHelper');
+var dbutil = require('db-helper');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

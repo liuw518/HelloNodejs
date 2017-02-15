@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var auth = require('./auth');
 
 var routersLoader = require('routers-loader');
-var logFactory = require('logfactory');
+var logFactory = require('log-factory');
 var logger = logFactory.getLogger();
 
 var app = express();
