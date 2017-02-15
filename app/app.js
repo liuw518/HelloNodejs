@@ -9,7 +9,7 @@ var path = require('path');
 // var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var auth = require('./auth');
+var auth = require('auth');
 
 var routersLoader = require('routers-loader');
 var logFactory = require('log-factory');
