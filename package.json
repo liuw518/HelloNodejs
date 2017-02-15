@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./app/app"
   },
   "dependencies": {
     "bluebird": "^3.4.7",
@@ -16,6 +16,7 @@
     "lodash": "^4.17.4",
     "log4js": "^1.1.0",
     "mysql": "^2.13.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "spdy": "^3.4.4"
   }
 }
