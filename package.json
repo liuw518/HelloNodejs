@@ -1,22 +1,22 @@
 {
-  "name": "hellonodejs",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./app/app"
-  },
-  "dependencies": {
-    "serve-favicon": "~2.3.0",
-    "body-parser": "~1.15.2",
-    "cookie-parser": "~1.4.3",
-    "ejs": "~2.5.2",
-    "express": "~4.14.0",
-    
-    "bluebird": "^3.4.7",
-    "jsonwebtoken": "^7.2.1",
-    "lodash": "^4.17.4",
-    "log4js": "^1.1.0",
-    "mysql": "^2.13.0",
-    "spdy": "^3.4.4"
-  }
+    "name": "hellonodejs",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./app/app"
+    },
+    "dependencies": {
+        "serve-favicon": "~2.3.0",
+        "body-parser": "~1.15.2",
+        "cookie-parser": "~1.4.3",
+        "ejs": "~2.5.2",
+        "express": "~4.14.0",
+
+        "bluebird": "^3.4.7",
+        "jsonwebtoken": "^7.2.1",
+        "lodash": "^4.17.4",
+        "log4js": "^1.1.0",
+        "mysql": "^2.13.0",
+        "spdy": "^3.4.4"
+    }
 }
