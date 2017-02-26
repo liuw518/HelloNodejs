@@ -1,47 +1,48 @@
 {
-    "globals": {
-        "process": true,
-        "__dirname": true,
-        "_": true
-    },
-    "env": {
-        "browser": true,
-        "commonjs": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        }
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-unused-vars": ["error", {
-            "vars": "all",
-            "args": "none",
-            "ignoreRestSiblings": false
-        }],
-        "no-console": ["error", {
-            "allow": ["warn", "error"]
-        }]
+  "globals": {
+    "process": true,
+    "__dirname": true,
+    "_": true,
+    "$": true
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
     }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-unused-vars": ["error", {
+      "vars": "all",
+      "args": "none",
+      "ignoreRestSiblings": false
+    }],
+    "no-console": ["error", {
+      "allow": ["warn", "error"]
+    }]
+  }
 }
