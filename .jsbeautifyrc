@@ -1,4 +1,7 @@
 {
-    "eol": "\n",
-    "indent_size": 4
+  "eol": "\n", //换行符LF
+  "indent_size": 4, //默认4个缩进
+  "js": {
+    "indent_size": 2 //js为2个缩进
+  }
 }
