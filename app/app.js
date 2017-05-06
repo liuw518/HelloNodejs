@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(path.dirname(__dirname), 'public')));
 
 //access control
-app.use('/', auth.router);
+// app.use('/', auth.router);
 
 //dynamic load routers
 routersLoader('./app/routes', app, auth.check);
