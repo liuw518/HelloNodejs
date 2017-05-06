@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
   // 响应报文转换
   // 返回报文落地
   console.log(req.body);
-  var fileStr = fs.readFileSync('public/data/4sffhbw.json', 'utf8');
+  var fileStr = fs.readFileSync('public/data/3hbfhbw.json', 'utf8');
   res.send(fileStr);
 });
 
