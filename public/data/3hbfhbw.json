@@ -1,0 +1,25 @@
+{
+  "rule_errors": [],
+  "transaction_no": "11000020934",
+  "print_no": "2010010100014356",
+  "third_transaction_no": "57037328133789518326",
+  "insureds": [{
+    "index": "1",
+    "risks": [{
+      "main_risk_code": "111505",
+      "copies": "",
+      "is_insure_whole_life": "Y",
+      "payment_schedule": "12",
+      "is_payment_whole_life": "N",
+      "risk_code": "111505",
+      "insure_period_value": "",
+      "insure_period_unit": "",
+      "payment_period_value": "10",
+      "payment_period_unit": "Y",
+      "amount_insured": "100000000",
+      "initial_premium": "2453000"
+    }]
+  }],
+  "result_code": "0",
+  "result_message": "核保通过"
+}

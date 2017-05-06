@@ -1,0 +1,23 @@
+{
+  "insureds": [{
+    "index": "1",
+    "risks": [{
+      "is_insure_whole_life": "Y",
+      "payment_schedule": "12",
+      "is_payment_whole_life": "N",
+      "risk_code": "111505",
+      "main_risk_code": "111505",
+      "insure_period_value": "",
+      "insure_period_unit": "",
+      "payment_period_value": "10",
+      "payment_period_unit": "Y",
+      "amount_insured": "1000000",
+      "initial_premium": "23020"
+    }],
+    "sex": "F",
+    "age": 19,
+    "birthday": "1998-04-05"
+  }],
+  "result_code": "0",
+  "result_message": "成功"
+}
