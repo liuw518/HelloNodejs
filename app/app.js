@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 app.use(logFactory.log4js.connectLogger(logger, {
   level: 'auto'
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
