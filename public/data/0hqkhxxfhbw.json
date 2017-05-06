@@ -1,0 +1,22 @@
+{
+  "result": "succ",
+  "user_info_bind": {
+    "birthday": "1994-02-27",
+    "area": null,
+    "home_phone": "",
+    "address": "",
+    "occupation": "",
+    "city": null,
+    "openid": "oszslt8RPBi-ma6Ag2EFbGiUIdfE",
+    "user_name": "哈哈",
+    "sex": "M",
+    "mobile": "15040255599",
+    "work_phone": "",
+    "id_no": "123456",
+    "province": null,
+    "user_id": 214,
+    "id_type": "99",
+    "email": ""
+  },
+  "message": "获取微信绑定用户信息成功"
+}
